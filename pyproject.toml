@@ -1,21 +1,7 @@
 [project]
-name = "pybind11-example"
-version = "0.1.0"
-description = "A simple example project demonstrating how to use pybind11 to create Python bindings for C++ code."
-readme = "README.md"
-authors = [
-    { name = "canyon", email = "24362454+canyon-online@users.noreply.github.com" }
-]
-requires-python = ">=3.12"
-dependencies = []
-
-[project.optional-dependencies]
-test = ["pytest>=6.0"]
-
-[tool.scikit-build]
-minimum-version = "build-system.requires"
-build-dir = "build/{wheel_tag}"
+name = "example"
+version = "0.0.1"
 
 [build-system]
-requires = ["scikit-build-core>=0.10", "pybind11"]
+requires = ["scikit-build-core", "pybind11"]
 build-backend = "scikit_build_core.build"

@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.15)
-project(pybind11_example LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.15...4.0)
+project(${SKBUILD_PROJECT_NAME} LANGUAGES CXX)
 
+set(PYBIND11_FINDPYTHON ON)
 add_subdirectory(extern/pybind11)
 
-pybind11_add_module(_core MODULE src/main.cpp)
-install(TARGETS _core 
-    LIBRARY DESTINATION pybind11_example
-    RUNTIME DESTINATION pybind11_example)
+pybind11_add_module(example src/example.cpp)
+
+install(TARGETS example LIBRARY DESTINATION .)

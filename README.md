@@ -4,22 +4,24 @@ A simple example project demonstrating how to use pybind11 to create Python bind
 
 ## Overview
 
-This project creates a Python module `_core` that exposes a C++ function `hello_from_bin()` to Python. The module is wrapped in a Python package `pybind11_example` that provides a convenient `hello()` function.
+This project creates a Python module `example` that exposes a C++ function `square()` to Python. The function takes a number and returns its square.
 
 ## Project Structure
 
 ```
 pybind11-example/
 ├── src/
-│   ├── main.cpp                    # C++ source with pybind11 bindings
-│   └── pybind11_example/
-│       └── __init__.py             # Python package wrapper
+│   └── example.cpp                 # C++ source with pybind11 bindings
 ├── tests/
-│   ├── test_core.py                # Direct tests for _core module
-│   └── test_pybind11_example.py    # Tests for Python package
+│   ├── __init__.py                 # Test package
+│   └── test_example.py             # Tests for example module
 ├── extern/
 │   └── pybind11/                   # pybind11 submodule
 ├── CMakeLists.txt                  # CMake build configuration
+├── pyproject.toml                  # Python project configuration
+├── pytest.ini                     # pytest configuration
+├── requirements-test.txt           # Test dependencies
+├── example.pyi                     # Type stubs
 └── README.md
 ```
 
@@ -46,20 +48,25 @@ pybind11-example/
    cmake --build . --config Release
    ```
 
+   Alternatively, you can use scikit-build-core:
+   ```bash
+   pip install scikit-build-core pybind11
+   pip install .
+   ```
+
 ## Usage
 
-After building, the `_core.pyd` file will be created in the build directory. You can use it directly or through the Python wrapper:
+After building, the `example.pyd` file will be created in the build directory:
 
 ```python
-# Direct usage of _core module
-import _core
-result = _core.hello_from_bin()
-print(result)  # "Hello from pybind11-example!"
+import example
 
-# Using the Python package wrapper
-import pybind11_example
-result = pybind11_example.hello()
-print(result)  # "Hello from pybind11-example!"
+# Square a number
+result = example.square(5)
+print(result)  # 25.0
+
+result = example.square(2.5)
+print(result)  # 6.25
 ```
 
 ## Testing
@@ -75,6 +82,9 @@ pytest tests/
 
 This project uses:
 - **pybind11** for C++/Python bindings
+- **scikit-build-core** for modern Python packaging
 - **CMake** for build configuration
 - **pytest** for testing
 - **Visual Studio Code** with CMake and Python extensions for development
+
+The project includes type stubs (`example.pyi`) for better IDE support and type checking.
