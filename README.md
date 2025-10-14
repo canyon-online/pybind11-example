@@ -11,25 +11,26 @@ This project creates a Python module `example` that exposes a C++ function `squa
 ```
 pybind11-example/
 ├── src/
+│   ├── example/
+│   │   ├── __init__.py             # Python package initialization
+│   │   └── example.pyi             # Package type hinting
 │   └── example.cpp                 # C++ source with pybind11 bindings
 ├── tests/
-│   ├── __init__.py                 # Test package
-│   └── test_example.py             # Tests for example module
+│   └── test_example.py             # Python package test
 ├── extern/
-│   └── pybind11/                   # pybind11 submodule
+│   └── pybind11/                   # pybind11 submodule (v3.0.1)
 ├── CMakeLists.txt                  # CMake build configuration
 ├── pyproject.toml                  # Python project configuration
-├── pytest.ini                     # pytest configuration
+├── pytest.ini                      # pytest configuration
 ├── requirements-test.txt           # Test dependencies
-├── example.pyi                     # Type stubs
 └── README.md
 ```
 
 ## Requirements
 
 - Python 3.12+
-- CMake 3.15+
-- Visual Studio 2017+ (on Windows)
+- CMake 3.18+
+- Visual Studio 2022+ (on Windows) or GCC 4.8+/Clang 3.3+ (on Linux)
 - Git (for submodules)
 
 ## Building
@@ -37,10 +38,17 @@ pybind11-example/
 1. Clone the repository with submodules:
    ```bash
    git clone --recursive <repository-url>
-   cd pybind11-example
+   cd pybind11-example-dll
    ```
 
-2. Configure and build with CMake:
+2. **Recommended: Using scikit-build-core (pip install)**
+   ```bash
+   pip install .
+   ```
+
+3. **Alternative: Direct CMake build**
+
+   **Windows (Visual Studio):**
    ```bash
    mkdir build
    cd build
@@ -48,10 +56,12 @@ pybind11-example/
    cmake --build . --config Release
    ```
 
-   Alternatively, you can use scikit-build-core:
+   **Linux/macOS:**
    ```bash
-   pip install scikit-build-core pybind11
-   pip install .
+   mkdir build
+   cd build
+   cmake .. -DCMAKE_BUILD_TYPE=Release
+   cmake --build .
    ```
 
 ## Usage
@@ -82,9 +92,7 @@ pytest tests/
 
 This project uses:
 - **pybind11** for C++/Python bindings
-- **scikit-build-core** for modern Python packaging
+- **scikit-build-core** for Python packaging
 - **CMake** for build configuration
 - **pytest** for testing
 - **Visual Studio Code** with CMake and Python extensions for development
-
-The project includes type stubs (`example.pyi`) for better IDE support and type checking.
