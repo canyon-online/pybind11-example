@@ -1,7 +1,7 @@
 {
-    "python.analysis.extraPaths": [
-        "./build/Debug",
-        "./build/Release"
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "python.testing.pytestArgs": [
+        "tests"
     ],
-    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+    "python.testing.pytestEnabled": true
 }
